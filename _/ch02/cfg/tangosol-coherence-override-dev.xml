@@ -1,0 +1,8 @@
+<coherence xml-override="/tangosol-coherence-override.xml">
+  <cluster-config>
+    <multicast-listener>
+      <time-to-live>0</time-to-live>
+      <join-timeout-milliseconds>1000</join-timeout-milliseconds>
+    </multicast-listener>
+  </cluster-config>
+</coherence>

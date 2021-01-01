@@ -1,0 +1,275 @@
+<project name="Coherent Bank" default="build">
+
+  <property file="build.properties"/>
+
+  <property name="jar.name"     value="coherent-bank"/>
+  <property name="jar.version"  value="1.0"/>
+  <property name="base.package" value="com.seovic.samples.bank"/>
+  <property name="war.name"     value="coherent-bank"/>
+
+  <property environment="env"/>
+  <property name="env.COHERENCE_HOME" value="${coherence.home}"/>
+
+  <property name="terminal.dir" value="../net"/>
+  
+  <property name="cfg.dir"   value="cfg"/>
+  <property name="src.dir"   value="src"/>
+  <property name="test.dir"  value="test"/>
+  <property name="build.dir" value="build"/>
+  <property name="dist.dir"  value="dist"/>
+  <property name="lib.dir"   value="lib"/>
+  <property name="bin.dir"   value="bin"/>
+  <property name="web.dir"   value="web"/>
+  <property name="war.dir"   value="war"/>
+  <property name="db.dir"    value="db"/>
+
+  <property name="jetty.port" value="8080"/>
+  <property name="jetty.host" value="127.0.0.1"/>
+
+  <path id="classpath">
+    <pathelement location="${build.dir}/classes"/>
+    <pathelement path="${env.COHERENCE_HOME}/lib/coherence.jar"/>
+    <fileset dir="${lib.dir}">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+
+  <path id="test.classpath">
+    <pathelement location="${build.dir}/classes"/>
+    <pathelement location="${build.dir}/tests"/>
+    <pathelement path="${env.COHERENCE_HOME}/lib/coherence.jar"/>
+    <pathelement path="${env.COHERENCE_HOME}/lib/coherence-jpa.jar"/>
+    <fileset dir="${lib.dir}">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+
+  <target name="clean"
+          description="Clean all build artifacts">
+    <delete dir="${build.dir}"/>
+    <delete dir="${dist.dir}"/>
+    <delete dir="${war.dir}"/>
+  </target>
+
+  <target name="build"
+          description="Build CoherentBank Java application">
+    <mkdir dir="${build.dir}/classes"/>
+    <javac compiler="javac1.5"
+           srcdir="${src.dir}"
+           destdir="${build.dir}/classes"
+           classpathref="classpath"
+           source="1.5"
+           target="1.5"
+           debug="true">
+    </javac>
+
+    <copy todir="${build.dir}/classes">
+      <fileset dir="${cfg.dir}">
+        <include name="**/*.xml"/>
+        <include name="**/*.properties"/>
+      </fileset>
+      <fileset dir="${db.dir}">
+        <include name="**/*.sql"/>
+      </fileset>
+      <fileset dir="${src.dir}">
+        <include name="**/*.properties"/>
+      </fileset>
+    </copy>
+
+    <mkdir dir="${build.dir}/tests"/>
+    <javac compiler="javac1.5"
+           srcdir="${test.dir}"
+           destdir="${build.dir}/tests"
+           classpathref="classpath"
+           source="1.5"
+           target="1.5"
+           debug="true">
+    </javac>
+
+    <copy todir="${build.dir}/tests">
+      <fileset dir="${test.dir}">
+        <include name="**/*.xml"/>
+        <include name="**/*.csv"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="test" depends="build, init-db"
+          description="Run CoherentBank unit test">
+    <junit haltonfailure="yes">
+      <classpath refid="test.classpath"/>
+      <batchtest>
+        <fileset dir="${test.dir}">
+          <include name="**/*Tests.java"/>
+          <exclude name="**/Abstract*.java"/>
+        </fileset>
+      </batchtest>
+      <formatter type="brief" usefile="false"/>
+    </junit>
+  </target>
+
+  <target name="war" depends="build"
+          description="Package CoherentBank application">
+    <mkdir dir="${war.dir}"/>
+    <copy todir="${war.dir}">
+      <fileset dir="${web.dir}"/>
+    </copy>
+
+    <mkdir dir="${war.dir}/WEB-INF/classes"/>
+    <mkdir dir="${war.dir}/WEB-INF/lib"/>
+    <copy todir="${war.dir}/WEB-INF/classes">
+      <fileset dir="${build.dir}/classes"/>
+    </copy>
+    <copy todir="${war.dir}/WEB-INF/lib" flatten="true">
+      <fileset dir="${lib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </copy>
+    <copy todir="${war.dir}/WEB-INF/lib"
+          file="${env.COHERENCE_HOME}/lib/coherence.jar" />
+    <jar destfile="${war.name}.war" basedir="${war.dir}"/>
+  </target>
+
+  <target name="start-cache-server" depends="build"
+          description="Start cache server instance">
+    <java classname="com.tangosol.net.DefaultCacheServer"
+          classpathref="test.classpath"
+          fork="true" spawn="true"
+          dir="${basedir}">
+      <jvmarg value="-server"/>
+      <jvmarg value="-Xms64m"/>
+      <jvmarg value="-Xmx64m"/>
+      <jvmarg value="-Dtangosol.coherence.management=all"/>
+      <jvmarg value="-Dtangosol.coherence.management.remote=true"/>
+      <jvmarg value="-Dcom.sun.management.jmxremote"/>
+    </java>
+  </target>
+  
+  <target name="start-console" depends="build"
+          description="Start Coherence Console">
+	  <java classname="com.tangosol.net.CacheFactory"
+          classpathref="test.classpath"
+          fork="true" spawn="false"
+          dir="${basedir}">
+      <jvmarg value="-server"/>
+      <jvmarg value="-Xms32m"/>
+      <jvmarg value="-Xmx32m"/>
+	    <jvmarg value="-Dtangosol.coherence.distributed.localstorage=false"/>
+	  </java>
+  </target>
+
+  <target name="start-extend-proxy" depends="build"
+          description="Start proxy server instance">
+	  <java classname="com.tangosol.net.DefaultCacheServer"
+          classpathref="test.classpath"
+          fork="true" spawn="true"
+          dir="${basedir}">
+      <jvmarg value="-server"/>
+      <jvmarg value="-Xms32m"/>
+      <jvmarg value="-Xmx32m"/>
+	    <jvmarg value="-Dtangosol.coherence.cacheconfig=extend-proxy-config.xml"/>
+	    <jvmarg value="-Dtangosol.coherence.distributed.localstorage=false"/>
+	  </java>
+  </target>
+
+  <target name="start-web-server" depends="war"
+          description="Start web server instance">
+	  <java classname="com.seovic.samples.bank.WebServer$Start"
+          classpathref="test.classpath"
+          fork="true" spawn="true"
+          dir="${basedir}">
+      <jvmarg value="-server"/>
+      <jvmarg value="-Xms64m"/>
+      <jvmarg value="-Xmx64m"/>
+      <!--<jvmarg value="-Dtangosol.coherence.distributed.localstorage=false"/>-->
+      <jvmarg value="-Dtangosol.coherence.management=all"/>
+      <jvmarg value="-Dtangosol.coherence.management.remote=true"/>
+      <jvmarg value="-Dcom.sun.management.jmxremote"/>
+
+      <!-- override if needed
+      <jvmarg value="-Djetty.host=${jetty.host}"/>
+      <jvmarg value="-Djetty.port=${jetty.port}"/>
+      -->
+      <jvmarg value="-Dwar.dir=${war.dir}"/>
+	  </java>
+  </target>
+
+  <target name="cluster-info"
+          description="Print Coherence cluster info">
+	  <java classname="com.seovic.coherence.util.ClusterManager"
+          classpathref="test.classpath">
+      <arg value="info"/>
+	  </java>
+  </target>
+
+  <target name="stop-cluster"
+          description="Shutdown Coherence cluster">
+	  <java classname="com.seovic.coherence.util.ClusterManager"
+          classpathref="test.classpath">
+      <arg value="kill"/>
+	  </java>
+  </target>
+
+  <target name="stop-web-server"
+          description="Stop web server instance">
+	  <java classname="com.seovic.samples.bank.WebServer$Stop"
+          classpathref="test.classpath"
+          fork="true" spawn="true"
+          dir="${basedir}">
+      <jvmarg value="-server"/>
+      <jvmarg value="-Xms32m"/>
+      <jvmarg value="-Xmx32m"/>
+	  </java>
+  </target>
+
+  <target name="start-db-server"
+          description="Start H2 database server instance">
+    <echo>Starting H2 Database...</echo>
+	  <java classname="org.h2.tools.Server"
+          classpathref="test.classpath"
+          fork="true" spawn="true"
+          dir="${basedir}">
+      <jvmarg value="-server"/>
+      <jvmarg value="-Xms32m"/>
+      <jvmarg value="-Xmx32m"/>
+	  </java>
+  </target>
+
+  <target name="stop-db-server"
+          description="Stop H2 database server instance">
+	  <java classname="org.h2.tools.Server"
+          classpathref="test.classpath">
+      <arg value="-tcpShutdown"/>
+      <arg value="tcp://localhost"/>
+	  </java>
+  </target>
+
+  <target name="init-db"
+          description="Initialize database">
+    <echo>Creating database tables...</echo>
+	  <java classname="org.h2.tools.RunScript"
+          classpathref="test.classpath">
+      <arg value="-url"/>
+      <arg value="jdbc:h2:tcp://localhost/db/coherent-bank-db"/>
+      <arg value="-script"/>
+      <arg value="${db.dir}/create-tables.sql"/>
+	  </java>
+  </target>
+
+  <target name="web-app" depends="init-db, start-web-server"
+          description="Start Coherent Bank web application">
+    <waitfor>
+      <socket server="${jetty.host}" port="${jetty.port}"/>
+    </waitfor>
+    <exec executable="${browser.location}" spawn="true">
+        <arg line="http://${jetty.host}:${jetty.port}/bank/login"/>
+    </exec>
+  </target>
+
+  <target name="terminal" depends="build"
+          description="Start Branch Terminal">
+	  <exec executable="nant" dir="${terminal.dir}" spawn="true">
+		  <arg value="run-terminal"/>
+	  </exec>
+  </target>
+</project>

@@ -1,0 +1,101 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- NANT build script for BranchTerminal               -->
+<!-- sample application for Coherence book               -->
+<!-- Usage:                                                                -->
+<!--     prompt> nant build                                                -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<project name="BranchTerminal" default="build">
+
+   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+   <!-- Global properties                                                   -->
+   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+   
+   <include buildfile="BranchTerminal.properties"/>
+   
+   <!-- Global directories -->
+   <property name="project.dir" value="${project::get-base-directory()}"/>
+   <property name="bin.dir"     value="${project.dir}\bin"/>
+   <property name="build.dir"   value="${project.dir}\build"/>
+   <property name="dist.dir"    value="${project.dir}\dist"/>
+   <property name="src.dir"     value="${project.dir}\src"/>
+   
+   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+   <!-- Global project targets                                              -->
+   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+   <!-- Remove all build artifacts -->
+   <target name="clean" description="Remove all build artifacts">
+      <delete failonerror="false" dir="${build.dir}"/>
+      <delete failonerror="false" dir="${src.dir}\BranchTerminal.WPF\bin"/>
+      <delete failonerror="false" dir="${src.dir}\BranchTerminal.WPF\obj"/>
+   </target>
+
+   <!-- Main build target -->
+   <target name="build"
+           depends="build-3.5"
+           description="Build Branch Terminal">
+   </target>
+
+   <target name="build-3.5">
+      <property name="nant.settings.currentframework" value="net-3.5"/>
+      <call target="display-target-framework"/>
+      <mkdir dir="${build.dir}"/>
+
+  	  <property name="log.file.name" value="${build.dir}\BranchTerminal.build.log"/>
+	    <delete>
+		    <fileset basedir=".">
+			    <include name="${log.file.name}"/>
+		    </fileset>
+	    </delete>
+	  
+      <property name="build.target.net.version" value="3.5"/>
+	    <exec program="MSBuild.exe"
+            basedir="${framework::get-framework-directory(framework::get-target-framework())}"
+            workingdir="${project.dir}"
+		        output="${log.file.name}"
+            commandline="BranchTerminal.sln /p:Configuration=${build.type}"/>
+  	  
+     </target>
+
+   <target name="run-terminal" depends="clean, build">
+		  <property name="log.file.name" value="${build.dir}\BranchTerminal.run.log"/>
+		  <delete>
+			  <fileset basedir=".">
+				  <include name="${log.file.name}"/>
+			  </fileset>
+  		</delete>
+		
+		  <exec program="BranchTerminal.exe"
+			      basedir="${build.dir}\${build.type}"
+			      workingdir="${build.dir}\${build.type}"
+			      output="${log.file.name}" />
+   
+   </target>
+   
+   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+   <!-- Internal project targets                                            -->
+   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+   <!-- Echo information about the .NET framework in use -->
+   <target name="display-target-framework">
+      <echo message=""/>
+      <echo message="******************************************************************************"/>
+      <echo message="|"/>
+      <echo message="| ${framework::get-description(framework::get-target-framework())}"/>
+      <echo message="|"/>
+      <echo message="******************************************************************************"/>
+      <echo message=""/>
+      <echo message="Framework           : ${framework::get-target-framework()}"/>
+      <echo message="Description         : ${framework::get-description(framework::get-target-framework())}"/>
+      <if test="${framework::sdk-exists(framework::get-target-framework())}">
+         <echo message="SDK directory       : ${framework::get-sdk-directory(framework::get-target-framework())}"/>
+      </if>
+      <if test="${not framework::sdk-exists(framework::get-target-framework())}">
+         <echo message="SDK directory       : &lt;not configured/available>"/>
+      </if>
+      <echo message="Framework directory : ${framework::get-framework-directory(framework::get-target-framework())}"/>
+      <echo message="Assembly directory  : ${framework::get-assembly-directory(framework::get-target-framework())}"/>
+      <echo message=""/>
+   </target>
+</project>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE cache-config SYSTEM "cache-config.dtd">
+
+<cache-config>
+  <caching-scheme-mapping>
+    <cache-mapping>
+      <cache-name>*</cache-name>
+      <scheme-name>extend-dist</scheme-name>
+    </cache-mapping>
+  </caching-scheme-mapping>
+
+  <caching-schemes>
+    <remote-cache-scheme>
+      <scheme-name>extend-dist</scheme-name>
+      <service-name>ExtendTcpCacheService</service-name>
+      <initiator-config>
+        <tcp-initiator>
+          <remote-addresses>
+            <socket-address>
+              <address system-property="tangosol.coherence.proxy.address">localhost</address>
+              <port system-property="tangosol.coherence.proxy.port">9099</port>
+            </socket-address>
+          </remote-addresses>
+          <connect-timeout>10s</connect-timeout>
+        </tcp-initiator>
+        <outgoing-message-handler>
+		  <heartbeat-interval>1s</heartbeat-interval>
+          <heartbeat-timeout>10s</heartbeat-timeout>
+          <request-timeout>5s</request-timeout>
+        </outgoing-message-handler>
+      </initiator-config>
+    </remote-cache-scheme>
+	
+  </caching-schemes>
+</cache-config>

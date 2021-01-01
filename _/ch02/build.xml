@@ -1,0 +1,78 @@
+<project name="ch02" default="run-all">
+
+  <property environment="env"/>
+  <property name="env.COHERENCE_HOME" value="/opt/coherence-3.5"/>
+
+  <property name="src.dir"   value="src"/>
+  <property name="test.dir"  value="test"/>
+  <property name="build.dir" value="build"/>
+  <property name="lib.dir"   value="lib"/>
+
+  <path id="classpath">
+    <pathelement path="${env.COHERENCE_HOME}/lib/coherence.jar"/>
+    <pathelement location="${build.dir}/classes"/>
+    <fileset dir="${lib.dir}">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+
+  <target name="clean">
+    <delete dir="${build.dir}"/>
+  </target>
+
+  <target name="build">
+    <mkdir dir="${build.dir}/classes"/>
+    <javac compiler="javac1.5"
+           srcdir="${src.dir}"
+           destdir="${build.dir}/classes"
+           classpathref="classpath"
+           source="1.5"
+           target="1.5">
+    </javac>
+  </target>
+
+  <target name="test" depends="build">
+    <mkdir dir="${build.dir}/tests"/>
+    <javac compiler="javac1.5"
+           srcdir="${test.dir}"
+           destdir="${build.dir}/tests"
+           classpathref="classpath"
+           source="1.5"
+           target="1.5">
+    </javac>
+
+    <copy todir="${build.dir}/tests">
+      <fileset dir="${test.dir}">
+        <include name="*.csv"/>
+      </fileset>
+    </copy>
+
+    <junit haltonfailure="yes" showoutput="true" printsummary="on">
+      <classpath>
+        <pathelement path="${env.COHERENCE_HOME}/lib/coherence.jar"/>
+        <pathelement location="${build.dir}/tests"/>
+        <pathelement location="${build.dir}/classes"/>
+        <fileset dir="${lib.dir}">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+      <batchtest>
+        <fileset dir="${test.dir}">
+          <include name="**/*Tests.java"/>
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+  <target name="run-helloworld" depends="build">
+    <java fork="true" classname="ch02.helloworld.CoherenceHelloWorld">
+      <classpath>
+        <pathelement path="${env.COHERENCE_HOME}/lib/coherence.jar"/>
+        <pathelement location="${build.dir}/classes"/>
+      </classpath>
+      <jvmarg value="-ea"/>
+    </java>
+  </target>
+
+  <target name="run-all" depends="run-helloworld, test"/>
+</project>

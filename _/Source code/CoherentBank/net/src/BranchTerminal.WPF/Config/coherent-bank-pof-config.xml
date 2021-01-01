@@ -1,0 +1,58 @@
+<pof-config xmlns="http://schemas.tangosol.com/pof">
+  <user-type-list>
+    <include>assembly://Coherence/Tangosol.Config/coherence-pof-config.xml</include>
+    <include>assembly://Coherence.Tools/Seovic.Config/coherence-tools-pof-config.xml</include>
+
+    <user-type>
+      <type-id>1000</type-id>
+      <class-name>Seovic.Samples.Bank.Domain.Account, BranchTerminal</class-name>
+    </user-type>
+  	<user-type>
+      <type-id>1001</type-id>
+      <class-name>Seovic.Samples.Bank.Domain.Address, BranchTerminal</class-name>
+    </user-type>
+    
+    <user-type>
+      <type-id>1002</type-id>
+      <class-name>Seovic.Samples.Bank.Domain.Customer, BranchTerminal</class-name>
+    </user-type>
+    <user-type>
+      <type-id>1003</type-id>
+      <class-name>Seovic.Samples.Bank.Domain.Money, BranchTerminal</class-name>
+    </user-type>
+    <user-type>
+      <type-id>1004</type-id>
+      <class-name>Seovic.Samples.Bank.Domain.Transaction, BranchTerminal</class-name>
+    </user-type>
+    <user-type>
+      <type-id>1005</type-id>
+      <class-name>Seovic.Samples.Bank.Domain.Transaction+TransactionId, BranchTerminal</class-name>
+    </user-type>
+    <user-type>
+      <type-id>1006</type-id>
+      <class-name>Seovic.Samples.Bank.Domain.TransactionType, BranchTerminal</class-name>
+      <serializer>
+        <class-name>Seovic.Coherence.IO.Pof.EnumPofSerializer, Coherence.Tools</class-name>
+      </serializer>
+    </user-type>
+
+    <user-type>
+      <type-id>1050</type-id>
+      <class-name>Seovic.Samples.Bank.Domain.Commands.CoherenceCommandFactory+OpenAccountProcessor, BranchTerminal</class-name>
+    </user-type>
+    <user-type>
+      <type-id>1051</type-id>
+      <class-name>Seovic.Samples.Bank.Domain.Commands.CoherenceCommandFactory+WithdrawalProcessor, BranchTerminal</class-name>
+    </user-type>
+    <user-type>
+      <type-id>1052</type-id>
+      <class-name>Seovic.Samples.Bank.Domain.Commands.CoherenceCommandFactory+DepositProcessor, BranchTerminal</class-name>
+    </user-type>
+    
+	  <user-type>
+      <type-id>2000</type-id>
+      <class-name>Seovic.Samples.Bank.Domain.Currency, BranchTerminal</class-name>
+    </user-type>
+	
+  </user-type-list>
+</pof-config>

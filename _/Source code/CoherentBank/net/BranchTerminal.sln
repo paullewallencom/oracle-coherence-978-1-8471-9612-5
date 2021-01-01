@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BranchTerminal", "src\BranchTerminal.WPF\BranchTerminal.csproj", "{BB0C5629-9DF9-4214-AD98-A1815BBD1128}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BB62AECE-D6F4-48A2-B885-8EA073445BB5}"
+	ProjectSection(SolutionItems) = preProject
+		BranchTerminal.build = BranchTerminal.build
+		BranchTerminal.properties = BranchTerminal.properties
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB0C5629-9DF9-4214-AD98-A1815BBD1128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB0C5629-9DF9-4214-AD98-A1815BBD1128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB0C5629-9DF9-4214-AD98-A1815BBD1128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB0C5629-9DF9-4214-AD98-A1815BBD1128}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

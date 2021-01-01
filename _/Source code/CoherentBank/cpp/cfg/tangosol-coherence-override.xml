@@ -1,0 +1,10 @@
+<?xml version='1.0'?>
+
+<!DOCTYPE coherence SYSTEM "coherence.dtd">
+
+<coherence>
+  <logging-config>
+    <destination system-property="tangosol.coherence.log">coherence.log</destination>
+    <severity-level system-property="tangosol.coherence.log.level">5</severity-level>
+  </logging-config>
+</coherence>

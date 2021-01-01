@@ -1,0 +1,194 @@
+code,name,capital,currencySymbol,currencyName
+AFG,Afghanistan,Kabul,AFN,Afghani
+ALB,Albania,Tirana,ALL,Lek
+DZA,Algeria,Algiers,DZD,Dinar
+AND,Andorra,Andorra la Vella,EUR,Euro
+AGO,Angola,Luanda,AOA,Kwanza
+ATG,Antigua and Barbuda,Saint John's,XCD,Dollar
+ARG,Argentina,Buenos Aires,ARS,Peso
+ARM,Armenia,Yerevan,AMD,Dram
+AUS,Australia,Canberra,AUD,Dollar
+AUT,Austria,Vienna,EUR,Euro
+AZE,Azerbaijan,Baku,AZN,Manat
+BHS,Bahamas,Nassau,BSD,Dollar
+BHR,Bahrain,Manama,BHD,Dinar
+BGD,Bangladesh,Dhaka,BDT,Taka
+BRB,Barbados,Bridgetown,BBD,Dollar
+BLR,Belarus,Minsk,BYR,Ruble
+BEL,Belgium,Brussels,EUR,Euro
+BLZ,Belize,Belmopan,BZD,Dollar
+BEN,Benin,Porto-Novo,XOF,Franc
+BTN,Bhutan,Thimphu,BTN,Ngultrum
+BOL,Bolivia,La Paz,BOB,Boliviano
+BIH,Bosnia and Herzegovina,Sarajevo,BAM,Marka
+BWA,Botswana,Gaborone,BWP,Pula
+BRA,Brazil,Brasilia,BRL,Real
+BRN,Brunei,Bandar Seri Begawan,BND,Dollar
+BGR,Bulgaria,Sofia,BGN,Lev
+BFA,Burkina Faso,Ouagadougou,XOF,Franc
+BDI,Burundi,Bujumbura,BIF,Franc
+KHM,Cambodia,Phnom Penh,KHR,Riels
+CMR,Cameroon,Yaounde,XAF,Franc
+CAN,Canada,Ottawa,CAD,Dollar
+CPV,Cape Verde,Praia,CVE,Escudo
+CAF,Central African Republic,Bangui,XAF,Franc
+TCD,Chad,N'Djamena,XAF,Franc
+CHL,Chile,Santiago,CLP,Peso
+CHN,China,Beijing,CNY,Yuan
+COL,Colombia,Bogota,COP,Peso
+COM,Comoros,Moroni,KMF,Franc
+COD,Congo (Congo ñ Kinshasa),Kinshasa,CDF,Franc
+COG,Congo (Congo ñ Brazzaville),Brazzaville,XAF,Franc
+CRI,Costa Rica,San Jose,CRC,Colon
+CIV,Cote d'Ivoire (Ivory Coast),Yamoussoukro,XOF,Franc
+HRV,Croatia,Zagreb,HRK,Kuna
+CUB,Cuba,Havana,CUP,Peso
+CYP,Cyprus,Nicosia,CYP,Pound
+CZE,Czech Republic,Prague,CZK,Koruna
+DNK,Denmark,Copenhagen,DKK,Krone
+DJI,Djibouti,Djibouti,DJF,Franc
+DMA,Dominica,Roseau,XCD,Dollar
+DOM,Dominican Republic,Santo Domingo,DOP,Peso
+ECU,Ecuador,Quito,USD,Dollar
+EGY,Egypt,Cairo,EGP,Pound
+SLV,El Salvador,San Salvador,USD,Dollar
+GNQ,Equatorial Guinea,Malabo,XAF,Franc
+ERI,Eritrea,Asmara,ERN,Nakfa
+EST,Estonia,Tallinn,EEK,Kroon
+ETH,Ethiopia,Addis Ababa,ETB,Birr
+FJI,Fiji,Suva,FJD,Dollar
+FIN,Finland,Helsinki,EUR,Euro
+FRA,France,Paris,EUR,Euro
+GAB,Gabon,Libreville,XAF,Franc
+GMB,Gambia,Banjul,GMD,Dalasi
+GEO,Georgia,Tbilisi,GEL,Lari
+DEU,Germany,Berlin,EUR,Euro
+GHA,Ghana,Accra,GHS,Cedi
+GRC,Greece,Athens,EUR,Euro
+GRD,Grenada,Saint George's,XCD,Dollar
+GTM,Guatemala,Guatemala,GTQ,Quetzal
+GIN,Guinea,Conakry,GNF,Franc
+GNB,Guinea-Bissau,Bissau,XOF,Franc
+GUY,Guyana,Georgetown,GYD,Dollar
+HTI,Haiti,Port-au-Prince,HTG,Gourde
+HND,Honduras,Tegucigalpa,HNL,Lempira
+HUN,Hungary,Budapest,HUF,Forint
+ISL,Iceland,Reykjavik,ISK,Krona
+IND,India,New Delhi,INR,Rupee
+IDN,Indonesia,Jakarta,IDR,Rupiah
+IRN,Iran,Tehran,IRR,Rial
+IRQ,Iraq,Baghdad,IQD,Dinar
+IRL,Ireland,Dublin,EUR,Euro
+ISR,Israel,Jerusalem,ILS,Shekel
+ITA,Italy,Rome,EUR,Euro
+JAM,Jamaica,Kingston,JMD,Dollar
+JPN,Japan,Tokyo,JPY,Yen
+JOR,Jordan,Amman,JOD,Dinar
+KAZ,Kazakhstan,Astana,KZT,Tenge
+KEN,Kenya,Nairobi,KES,Shilling
+KIR,Kiribati,Tarawa,AUD,Dollar
+PRK,North Korea,Pyongyang,KPW,Won
+KOR,South Korea,Seoul,KRW,Won
+KWT,Kuwait,Kuwait,KWD,Dinar
+KGZ,Kyrgyzstan,Bishkek,KGS,Som
+LAO,Laos,Vientiane,LAK,Kip
+LVA,Latvia,Riga,LVL,Lat
+LBN,Lebanon,Beirut,LBP,Pound
+LSO,Lesotho,Maseru,LSL,Loti
+LBR,Liberia,Monrovia,LRD,Dollar
+LBY,Libya,Tripoli,LYD,Dinar
+LIE,Liechtenstein,Vaduz,CHF,Franc
+LTU,Lithuania,Vilnius,LTL,Litas
+LUX,Luxembourg,Luxembourg,EUR,Euro
+MKD,Macedonia,Skopje,MKD,Denar
+MDG,Madagascar,Antananarivo,MGA,Ariary
+MWI,Malawi,Lilongwe,MWK,Kwacha
+MYS,Malaysia,Kuala Lumpur,MYR,Ringgit
+MDV,Maldives,Male,MVR,Rufiyaa
+MLI,Mali,Bamako,XOF,Franc
+MLT,Malta,Valletta,MTL,Lira
+MHL,Marshall Islands,Majuro,USD,Dollar
+MRT,Mauritania,Nouakchott,MRO,Ouguiya
+MUS,Mauritius,Port Louis,MUR,Rupee
+MEX,Mexico,Mexico,MXN,Peso
+FSM,Micronesia,Palikir,USD,Dollar
+MDA,Moldova,Chisinau,MDL,Leu
+MCO,Monaco,Monaco,EUR,Euro
+MNG,Mongolia,Ulaanbaatar,MNT,Tugrik
+MNE,Montenegro,Podgorica,EUR,Euro
+MAR,Morocco,Rabat,MAD,Dirham
+MOZ,Mozambique,Maputo,MZM,Meticail
+MMR,Myanmar (Burma),Naypyidaw,MMK,Kyat
+NAM,Namibia,Windhoek,NAD,Dollar
+NRU,Nauru,Yaren,AUD,Dollar
+NPL,Nepal,Kathmandu,NPR,Rupee
+NLD,Netherlands,Amsterdam,EUR,Euro
+NZL,New Zealand,Wellington,NZD,Dollar
+NIC,Nicaragua,Managua,NIO,Cordoba
+NER,Niger,Niamey,XOF,Franc
+NGA,Nigeria,Abuja,NGN,Naira
+NOR,Norway,Oslo,NOK,Krone
+OMN,Oman,Muscat,OMR,Rial
+PAK,Pakistan,Islamabad,PKR,Rupee
+PLW,Palau,Melekeok,USD,Dollar
+PAN,Panama,Panama,PAB,Balboa
+PNG,Papua New Guinea,Port Moresby,PGK,Kina
+PRY,Paraguay,Asuncion,PYG,Guarani
+PER,Peru,Lima,PEN,Sol
+PHL,Philippines,Manila,PHP,Peso
+POL,Poland,Warsaw,PLN,Zloty
+PRT,Portugal,Lisbon,EUR,Euro
+QAT,Qatar,Doha,QAR,Rial
+ROU,Romania,Bucharest,RON,Leu
+RUS,Russia,Moscow,RUB,Ruble
+RWA,Rwanda,Kigali,RWF,Franc
+KNA,Saint Kitts and Nevis,Basseterre,XCD,Dollar
+LCA,Saint Lucia,Castries,XCD,Dollar
+VCT,Saint Vincent and the Grenadines,Kingstown,XCD,Dollar
+WSM,Samoa,Apia,WST,Tala
+SMR,San Marino,San Marino,EUR,Euro
+STP,Sao Tome and Principe,Sao Tome,STD,Dobra
+SAU,Saudi Arabia,Riyadh,SAR,Rial
+SEN,Senegal,Dakar,XOF,Franc
+SRB,Serbia,Belgrade,RSD,Dinar
+SYC,Seychelles,Victoria,SCR,Rupee
+SLE,Sierra Leone,Freetown,SLL,Leone
+SGP,Singapore,Singapore,SGD,Dollar
+SVK,Slovakia,Bratislava,SKK,Koruna
+SVN,Slovenia,Ljubljana,EUR,Euro
+SLB,Solomon Islands,Honiara,SBD,Dollar
+SOM,Somalia,Mogadishu,SOS,Shilling
+ZAF,South Africa,Pretoria,ZAR,Rand
+ESP,Spain,Madrid,EUR,Euro
+LKA,Sri Lanka,Colombo,LKR,Rupee
+SDN,Sudan,Khartoum,SDG,Pound
+SUR,Suriname,Paramaribo,SRD,Dollar
+SWZ,Swaziland,Mbabane,SZL,Lilangeni
+SWE,Sweden,Stockholm,SEK,Kronoa
+CHE,Switzerland,Bern,CHF,Franc
+SYR,Syria,Damascus,SYP,Pound
+TJK,Tajikistan,Dushanbe,TJS,Somoni
+TZA,Tanzania,Dar es Salaam,TZS,Shilling
+THA,Thailand,Bangkok,THB,Baht
+TLS,Timor-Leste (East Timor),Dili,USD,Dollar
+TGO,Togo,Lome,XOF,Franc
+TON,Tonga,Nuku'alofa,TOP,Pa'anga
+TTO,Trinidad and Tobago,Port-of-Spain,TTD,Dollar
+TUN,Tunisia,Tunis,TND,Dinar
+TUR,Turkey,Ankara,TRY,Lira
+TKM,Turkmenistan,Ashgabat,TMM,Manat
+TUV,Tuvalu,Funafuti,AUD,Dollar
+UGA,Uganda,Kampala,UGX,Shilling
+UKR,Ukraine,Kiev,UAH,Hryvnia
+ARE,United Arab Emirates,Abu Dhabi,AED,Dirham
+GBR,United Kingdom,London,GBP,Pound
+USA,United States,Washington,USD,Dollar
+URY,Uruguay,Montevideo,UYU,Peso
+UZB,Uzbekistan,Tashkent,UZS,Som
+VUT,Vanuatu,Port-Vila,VUV,Vatu
+VAT,Vatican City,Vatican City,EUR,Euro
+VEN,Venezuela,Caracas,VEB,Bolivar
+VNM,Vietnam,Hanoi,VND,Dong
+YEM,Yemen,Sanaa,YER,Rial
+ZMB,Zambia,Lusaka,ZMK,Kwacha
+ZWE,Zimbabwe,Harare,ZWD,Dollar

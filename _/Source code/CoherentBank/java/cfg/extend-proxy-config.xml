@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright 2009 Aleksandar Seovic
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE cache-config SYSTEM "cache-config.dtd">
+
+<cache-config>
+
+  <caching-scheme-mapping>
+
+    <cache-mapping>
+      <cache-name>customers</cache-name>
+      <scheme-name>customers-scheme</scheme-name>
+    </cache-mapping>
+
+    <cache-mapping>
+      <cache-name>accounts</cache-name>
+      <scheme-name>accounts-scheme</scheme-name>
+    </cache-mapping>
+
+    <cache-mapping>
+      <cache-name>transactions</cache-name>
+      <scheme-name>accounts-scheme</scheme-name>
+      <init-params>
+        <init-param>
+          <param-name>write-delay</param-name>
+          <param-value>10s</param-value>
+        </init-param>
+        <init-param>
+          <param-name>write-batch-factor</param-name>
+          <param-value>.25</param-value>
+        </init-param>
+        <init-param>
+          <param-name>write-requeue-threshold</param-name>
+          <param-value>1000</param-value>
+        </init-param>
+      </init-params>
+    </cache-mapping>
+
+    <cache-mapping>
+      <cache-name>exchange-rates</cache-name>
+      <scheme-name>exchange-rates-scheme</scheme-name>
+      <init-params>
+        <init-param>
+          <param-name>refresh-ahead-factor</param-name>
+          <param-value>.75</param-value>
+        </init-param>
+      </init-params>
+    </cache-mapping>
+
+    <cache-mapping>
+      <cache-name>sequences</cache-name>
+      <scheme-name>sequences-scheme</scheme-name>
+    </cache-mapping>
+
+    <cache-mapping>
+      <cache-name>*</cache-name>
+      <scheme-name>reference-data-scheme</scheme-name>
+    </cache-mapping>
+
+  </caching-scheme-mapping>
+
+  <caching-schemes>
+
+    <distributed-scheme>
+      <scheme-name>accounts-scheme</scheme-name>
+      <scheme-ref>persistent-partitioned</scheme-ref>
+      <service-name>AccountsCacheService</service-name>
+      <autostart>true</autostart>
+    </distributed-scheme>
+
+    <!--
+      Extend proxy should never use near caching, so we need to
+      reconfigure customers-scheme
+    -->
+    <distributed-scheme>
+      <scheme-name>customers-scheme</scheme-name>
+      <scheme-ref>persistent-partitioned</scheme-ref>
+      <service-name>CustomersCacheService</service-name>
+      <autostart>true</autostart>
+    </distributed-scheme>
+
+    <distributed-scheme>
+      <scheme-name>exchange-rates-scheme</scheme-name>
+      <scheme-ref>default-partitioned</scheme-ref>
+      <service-name>ExchangeRatesCacheService</service-name>
+      <backing-map-scheme>
+        <read-write-backing-map-scheme>
+          <scheme-ref>persistent-backing-map</scheme-ref>
+          <internal-cache-scheme>
+            <local-scheme>
+              <scheme-ref>unlimited-backing-map</scheme-ref>
+              <expiry-delay>1m</expiry-delay>
+            </local-scheme>
+          </internal-cache-scheme>
+        </read-write-backing-map-scheme>
+      </backing-map-scheme>
+      <autostart>true</autostart>
+    </distributed-scheme>
+
+    <distributed-scheme>
+      <scheme-name>sequences-scheme</scheme-name>
+      <scheme-ref>persistent-partitioned</scheme-ref>
+      <service-name>SequenceGenerator</service-name>
+      <autostart>true</autostart>
+    </distributed-scheme>
+
+    <distributed-scheme>
+      <scheme-name>reference-data-scheme</scheme-name>
+      <scheme-ref>default-partitioned</scheme-ref>
+      <service-name>ReferenceDataCacheService</service-name>
+      <autostart>true</autostart>
+    </distributed-scheme>
+
+    <!--
+      Default partitioned caching scheme.
+    -->
+    <distributed-scheme>
+      <scheme-name>default-partitioned</scheme-name>
+      <service-name>DistributedCache</service-name>
+      <serializer>
+        <class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+        <init-params>
+          <init-param>
+            <param-type>java.lang.String</param-type>
+            <param-value>coherent-bank-pof-config.xml</param-value>
+          </init-param>
+        </init-params>
+      </serializer>
+      <backing-map-scheme>
+        <local-scheme>
+          <scheme-ref>unlimited-backing-map</scheme-ref>
+        </local-scheme>
+      </backing-map-scheme>
+    </distributed-scheme>
+
+    <!--
+      Persistent partitioned caching scheme.
+    -->
+    <distributed-scheme>
+      <scheme-name>persistent-partitioned</scheme-name>
+      <scheme-ref>default-partitioned</scheme-ref>
+      <backing-map-scheme>
+        <read-write-backing-map-scheme>
+          <scheme-ref>persistent-backing-map</scheme-ref>
+        </read-write-backing-map-scheme>
+      </backing-map-scheme>
+    </distributed-scheme>
+
+    <!--
+      Backing map scheme definition with no size limit or time-based eviction
+    -->
+    <local-scheme>
+      <scheme-name>unlimited-backing-map</scheme-name>
+    </local-scheme>
+
+    <!--
+      Persistent backing map scheme
+    -->
+    <read-write-backing-map-scheme>
+      <scheme-name>persistent-backing-map</scheme-name>
+      <internal-cache-scheme>
+        <local-scheme>
+          <scheme-ref>unlimited-backing-map</scheme-ref>
+        </local-scheme>
+      </internal-cache-scheme>
+      <cachestore-scheme>
+        <class-scheme>
+          <class-name>
+            com.seovic.coherence.util.persistence.ConfigurableCacheStore
+          </class-name>
+          <init-params>
+            <init-param>
+              <param-type>string</param-type>
+              <param-value>{cache-name}</param-value>
+            </init-param>
+          </init-params>
+        </class-scheme>
+      </cachestore-scheme>
+      <write-delay>{write-delay 0}</write-delay>
+      <write-batch-factor>{write-batch-factor 0}</write-batch-factor>
+      <write-requeue-threshold>{write-requeue-threshold 0}</write-requeue-threshold>
+      <refresh-ahead-factor>{refresh-ahead-factor 0}</refresh-ahead-factor>
+    </read-write-backing-map-scheme>
+
+    <!--
+      InvocationService scheme
+    -->
+    <invocation-scheme>
+      <scheme-name>InvocationService</scheme-name>
+      <autostart>true</autostart>
+    </invocation-scheme>
+
+    <!--
+      Proxy server scheme
+    -->
+	  <proxy-scheme>
+      <service-name>ExtendTcpProxyService</service-name>
+      <thread-count system-property="tangosol.coherence.extend.threads">5</thread-count>
+      <acceptor-config>
+        <tcp-acceptor>
+          <local-address>
+            <address system-property="tangosol.coherence.extend.address">localhost</address>
+            <port system-property="tangosol.coherence.extend.port">9099</port>
+          </local-address>
+        </tcp-acceptor>
+        <serializer>
+          <class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+          <init-params>
+            <init-param>
+              <param-type>java.lang.String</param-type>
+              <param-value>coherent-bank-pof-config.xml</param-value>
+            </init-param>
+          </init-params>
+        </serializer>
+      </acceptor-config>
+      <autostart>true</autostart>
+    </proxy-scheme>
+
+  </caching-schemes>
+</cache-config>

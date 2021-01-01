@@ -1,0 +1,5 @@
+<coherence>
+  <logging-config>
+    <destination>log4j</destination>
+  </logging-config>
+</coherence>

@@ -1,0 +1,26 @@
+body {
+	margin: 0;
+	font: 12px/1.3em Tahoma,sans-serif;
+}
+
+#container {
+	position: relative;
+	width: 300px; margin: 100px auto;
+}
+
+.login-error, .login-message {
+	display: block; 
+	margin: 4px 0 8px;
+}
+
+.login-error {
+	padding: 4px 8px;
+	color: red; 
+	background: #ffe;
+	border: 1px solid #f90;
+}
+
+.login-error strong { font-weight: bold }
+
+.icon-login { background-image: url(key.png) !important; }
+.icon-register { background-image: url(key-add.png) !important; }

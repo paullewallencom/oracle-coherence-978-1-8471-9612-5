@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<coherence xmlns="http://schemas.tangosol.com/coherence">
+  <logging-config>
+    <destination>common-logger</destination>
+    <severity-level>5</severity-level>
+    <message-format>{date} &lt;{level}&gt; (thread={thread}): {text}</message-format>
+    <character-limit>8192</character-limit>
+  </logging-config>
+</coherence>

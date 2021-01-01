@@ -1,0 +1,10 @@
+body {
+	margin: 0;
+	font: 12px/1.3em Tahoma,sans-serif;
+}
+
+.icon-add { background-image: url(add.png) !important; }
+.icon-table { background-image: url(application-view-columns.png) !important; }
+.icon-view-detail { background-image: url(application-view-detail.png) !important; }
+.icon-money { background-image: url(money.png) !important; }
+.icon-user-edit { background-image: url(user-edit.png) !important; }
